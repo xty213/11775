@@ -2,13 +2,13 @@
 import sys
 
 def writeFile(posEvent, negEvent, eventNum):
-    with open(LIST_PATH + 'train_%d.list' % eventNum, 'w+') as f:
+    with open('%s/train_%d.list' % (LIST_PATH, eventNum), 'w+') as f:
         for i in xrange(10):
             f.write('%s,1\n' % posEvent[i])
         for i in xrange((eventNum - 1) * 200, eventNum * 200 - 100):
             f.write('%s,0\n' % negEvent[i])
 
-    with open(LIST_PATH + 'test_%d.list' % eventNum, 'w+') as f:
+    with open('%s/test_%d.list' % (LIST_PATH, eventNum), 'w+') as f:
         for i in xrange(10, len(posEvent)):
             f.write('%s,1\n' % posEvent[i])
         for i in xrange(eventNum * 200 - 100, eventNum * 200):
