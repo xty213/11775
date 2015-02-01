@@ -29,5 +29,5 @@ for eventNum in 1 2 3
 do
     echo "  Train and test Event ${eventNum}"
     # use logistic regression with default parameters
-    java -cp ${WEKA_PATH}/weka.jar weka.classifiers.functions.Logistic -R 1.0E-8 -M -1 -t ${BOW_PATH}/train_${eventNum}.csv -T ${BOW_PATH}/test_${eventNum}.csv > ${RESULT_PATH}/asr_${eventNum}.out
+    java -cp ${WEKA_PATH}/weka.jar weka.classifiers.functions.Logistic -R 1.0E-8 -M -1 -t ${BOW_PATH}/train_${eventNum}.csv -T ${BOW_PATH}/test_${eventNum}.csv -classifications weka.classifiers.evaluation.output.prediction.CSV > ${RESULT_PATH}/asr_${eventNum}.out
 done

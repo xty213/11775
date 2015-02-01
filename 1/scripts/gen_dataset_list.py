@@ -2,17 +2,23 @@
 import sys
 
 def writeFile(posEvent, negEvent, eventNum):
-    with open('%s/train_%d.list' % (LIST_PATH, eventNum), 'w+') as f:
+    f = open('%s/train_%d.list' % (LIST_PATH, eventNum), 'w+')
+    try:
         for i in xrange(10):
             f.write('%s,1\n' % posEvent[i])
         for i in xrange((eventNum - 1) * 200, eventNum * 200 - 100):
             f.write('%s,0\n' % negEvent[i])
+    finally:
+        f.close()
 
-    with open('%s/test_%d.list' % (LIST_PATH, eventNum), 'w+') as f:
+    f = open('%s/test_%d.list' % (LIST_PATH, eventNum), 'w+')
+    try:
         for i in xrange(10, len(posEvent)):
             f.write('%s,1\n' % posEvent[i])
         for i in xrange(eventNum * 200 - 100, eventNum * 200):
             f.write('%s,0\n' % negEvent[i])
+    finally:
+        f.close()
 
 
 CSV_PATH = sys.argv[1]
@@ -23,7 +29,8 @@ posEvent2 = []
 posEvent3 = []
 negEvent = []
 
-with open(CSV_PATH, 'r') as f:
+f = open(CSV_PATH, 'r')
+try:
     for line in f:
         # split each field
         strArr = line.split(',')
@@ -40,6 +47,8 @@ with open(CSV_PATH, 'r') as f:
             posEvent3.append(clipID)
         elif (instType == 'NULL'):
             negEvent.append(clipID)
+finally:
+    f.close()
 
 writeFile(posEvent1, negEvent, 1)
 writeFile(posEvent2, negEvent, 2)
